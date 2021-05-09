@@ -2,6 +2,11 @@ const feathers = require('@feathersjs/feathers');
 const express = require('@feathersjs/express');
 const socketio = require('@feathersjs/socketio');
 const Parallel = require('async-parallel')
+const zipCodes = require('german-zip-codes/data/data').data
+
+const niedersachsenZips = zipCodes
+    .filter(zip => zip.bundesland === 'Niedersachsen')
+    .map(zip => zip.plz)
 
 class RegionService {
     constructor() {
@@ -13,10 +18,17 @@ class RegionService {
     }
 
     async get(id) {
+        if (!niedersachsenZips.includes(id)) {
+            throw new Error('Ungültige Postleitzahl')
+        }
         return this.regions.find(region => region.id === id)
     }
 
     async create (data) {
+        if (!niedersachsenZips.includes(data.id)) {
+            throw new Error('Ungültige Postleitzahl')
+        }
+
         const region = {
             id: data.id,
             count: 1,

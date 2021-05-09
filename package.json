@@ -13,6 +13,9 @@
     "@feathersjs/feathers": "^4.5.11",
     "@feathersjs/socketio": "^4.5.11",
     "async-parallel": "^1.2.3",
-    "node-fetch": "^2.6.1"
+    "german-zip-codes": "^1.0.2",
+    "i": "^0.3.6",
+    "node-fetch": "^2.6.1",
+    "npm": "^7.12.0"
   }
 }
