@@ -131,9 +131,9 @@ addEventListener('#setup', 'click', async () => {
 
     await subscribe(region)
     showMain()
+    window.Notification.requestPermission()
 });
 
 client.service('regions').on('updated', onUpdate);
 
 showSetup()
-window.Notification.requestPermission()
