@@ -25,7 +25,14 @@ const setupHTML = `<main class="setup container">
     </button>
   </form>
   </div>
-</main>`;
+</main>
+<footer class="footer">
+  <div class="content has-text-centered">
+    <p>
+      <strong>Impf-o-mat Niedersachsen</strong> von <a href="https://marcelklehr.de">Marcel Klehr</a>. Dieser Service gehört nicht zum Land Niedersachsen.
+    </p>
+  </div>
+</footer>`;
 
 const mainHTML = `<main class="main container">
 <div class="hero is-primary">
@@ -39,7 +46,14 @@ const mainHTML = `<main class="main container">
   <div class="subtitle">Sie können diese Seite im Hintergrund geöffnet lassen und auf eine Benachrichtigung warten.</div>
   <progress class="progress is-small is-primary" max="100">0%</progress>
   </div>
-</main>`;
+</main>
+<footer class="footer">
+  <div class="content has-text-centered">
+    <p>
+      <strong>Impf-o-mat Niedersachsen</strong> von <a href="https://marcelklehr.de">Marcel Klehr</a>. Dieser Service gehört nicht zum Land Niedersachsen.
+    </p>
+  </div>
+</footer>`;
 
 const showSetup = (error) => {
     if(document.querySelectorAll('.setup').length && error) {
