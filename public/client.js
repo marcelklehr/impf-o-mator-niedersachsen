@@ -10,7 +10,7 @@ client.configure(feathers.socketio(socket));
 const setupHTML = `<main class="setup container">
 <div class="hero is-primary">
 <div class="hero-body">
-  <h1 class="title block">Impf-o-mat Niedersachsen</h1>
+  <h1 class="title block">Impf-o-mator Niedersachsen</h1>
   <div class="subtitle">Der Impf-o-mat informiert Sie, wenn Impftermine in Ihrer Region frei werden.</div>
 </div>
 </div>
@@ -29,7 +29,7 @@ const setupHTML = `<main class="setup container">
 <footer class="footer">
   <div class="content has-text-centered">
     <p>
-      <strong>Impf-o-mat Niedersachsen</strong> von <a href="https://marcelklehr.de">Marcel Klehr</a>. Dieser Service gehört nicht zum Land Niedersachsen.
+      <strong>Impf-o-mator Niedersachsen</strong> von <a href="https://marcelklehr.de">Marcel Klehr</a>. Dieser Service gehört nicht zum Land Niedersachsen.
     </p>
   </div>
 </footer>`;
@@ -37,8 +37,8 @@ const setupHTML = `<main class="setup container">
 const mainHTML = `<main class="main container">
 <div class="hero is-primary">
 <div class="hero-body">
-  <h1 class="title block">Impf-o-mat Niedersachsen</h1>
-  <div class="subtitle">Der Impf-o-mat informiert Sie, wenn Impftermine in Ihrer Region frei werden.</div>
+  <h1 class="title block">Impf-o-mator Niedersachsen</h1>
+  <div class="subtitle">Der Impf-o-mator informiert Sie, wenn Impftermine in Ihrer Region frei werden.</div>
 </div>
 </div>
   <div class="section mt-5 results">
@@ -50,7 +50,7 @@ const mainHTML = `<main class="main container">
 <footer class="footer">
   <div class="content has-text-centered">
     <p>
-      <strong>Impf-o-mat Niedersachsen</strong> von <a href="https://marcelklehr.de">Marcel Klehr</a>. Dieser Service gehört nicht zum Land Niedersachsen.
+      <strong>Impf-o-mator Niedersachsen</strong> von <a href="https://marcelklehr.de">Marcel Klehr</a>. Dieser Service gehört nicht zum Land Niedersachsen.
     </p>
   </div>
 </footer>`;
