@@ -11,10 +11,10 @@ const setupHTML = `<main class="setup container">
 <div class="hero is-primary">
 <div class="hero-body">
   <h1 class="title block">Impf-o-mator Niedersachsen</h1>
-  <div class="subtitle">Der Impf-o-mat informiert Sie, wenn Impftermine in Ihrer Region frei werden.</div>
+  <div class="subtitle">Der Impf-o-mator informiert Sie, wenn Impftermine in Ihrer Region frei werden.</div>
 </div>
 </div>
-  <div class="section mt-5">
+  <div class="section mt-5" id="main">
   <form class="form">
     <label class="label">Postleitzahl eingeben
       <input class="block input" type="text" name="id" placeholder="PLZ">
@@ -25,6 +25,26 @@ const setupHTML = `<main class="setup container">
     </button>
   </form>
   </div>
+  <div class="section mb-5 tile is-ancestor">
+  <div class="tile is-vertical card block m-3 p-6">
+      <div class="content">
+        <h2 class="title">Wie funktioniert's?</h2>
+        <ol>
+            <li>Postleitzahl eingeben</li>
+            <li>Auf Benachrichtigung warten (Die Wartezeit beträgt unter Umständen Stunden oder Tage)</li>
+            <li>Im Impfportal anmelden und den freien Termin auswählen (Manchmal ist jemand anderes schneller. Einfach nochmal probieren)</li>
+        </ol>
+      </div>
+      </div>
+      <div class="tile is-vertical card m-3 p-6">
+      <div class="content">
+        <h2 class="title">Datenschutz</h2>
+        <div class="content">
+            <p>Dieser Service speichert keine persönlichen Daten und setzt keine Cookies.</p>
+        </div>
+      </div>
+      </div>
+  </div>
 </main>
 <footer class="footer">
   <div class="content has-text-centered">
@@ -34,26 +54,13 @@ const setupHTML = `<main class="setup container">
   </div>
 </footer>`;
 
-const mainHTML = `<main class="main container">
-<div class="hero is-primary">
-<div class="hero-body">
-  <h1 class="title block">Impf-o-mator Niedersachsen</h1>
-  <div class="subtitle">Der Impf-o-mator informiert Sie, wenn Impftermine in Ihrer Region frei werden.</div>
-</div>
-</div>
-  <div class="section mt-5 results">
+const mainHTML = `
+  <div id="results">
   <h2 class="title">Warte auf Impftermine in <span id="plz"></span></h2>
   <div class="subtitle">Sie können diese Seite im Hintergrund geöffnet lassen und auf eine Benachrichtigung warten.</div>
   <progress class="progress is-small is-primary" max="100">0%</progress>
   </div>
-</main>
-<footer class="footer">
-  <div class="content has-text-centered">
-    <p>
-      <strong>Impf-o-mator Niedersachsen</strong> von <a href="https://marcelklehr.de">Marcel Klehr</a>. Dieser Service gehört nicht zum Land Niedersachsen.
-    </p>
-  </div>
-</footer>`;
+ `;
 
 const showSetup = (error) => {
     if(document.querySelectorAll('.setup').length && error) {
@@ -65,12 +72,12 @@ const showSetup = (error) => {
 
 // Shows the main page
 const showMain = async () => {
-    document.getElementById('app').innerHTML = mainHTML;
+    document.getElementById('main').innerHTML = mainHTML;
     document.getElementById('plz').innerHTML = Object.keys(subscriptions)[0];
 };
 
 const addNotification = center => {
-    const results = document.querySelector('.results');
+    const results = document.querySelector('#results');
 
     if(results) {
         results.innerHTML = `<div class="message is-primary">
@@ -79,7 +86,8 @@ const addNotification = center => {
 </div>
       <div class="message-body">
         <p>Öffnen Sie jetzt das <a href="https://impfportal-niedersachsen.de">Impfportal Niedersachsen</a>, um einen Termin zu buchen.</p>
-        <a class="button is-primary mt-3">Impfportal öffnen</a>
+        <a class="button is-primary mt-3" href="https://impfportal-niedersachsen.de">Impfportal öffnen</a>
+        <a class="button mt-3" href="/">Neuer Versuch</a>
       </div>
     </div>`;
     }
@@ -119,7 +127,7 @@ const addEventListener = (selector, event, handler) => {
     });
 };
 
-addEventListener('#setup', 'click', async () => {
+const submit = async () => {
     const regionData = getSetupData();
 
     let region = await client.service('regions').get(regionData.id)
@@ -132,6 +140,16 @@ addEventListener('#setup', 'click', async () => {
     await subscribe(region)
     showMain()
     window.Notification.requestPermission()
+}
+
+addEventListener('#setup', 'click', submit);
+
+addEventListener('[name="id"]', 'keydown', async (e) => {
+    if (e.which !== 13) {
+        return
+    }
+    e.preventDefault()
+    await submit()
 });
 
 client.service('regions').on('updated', onUpdate);
