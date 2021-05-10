@@ -129,9 +129,9 @@ const addEventListener = (selector, event, handler) => {
 
 const submit = async () => {
     const regionData = getSetupData();
-
+    let region
     try {
-        let region = await client.service('regions').get(regionData.id)
+        region = await client.service('regions').get(regionData.id)
         if (!region) {
             region = await client.service('regions').create(regionData)
         } else {
