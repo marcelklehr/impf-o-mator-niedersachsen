@@ -130,11 +130,16 @@ const addEventListener = (selector, event, handler) => {
 const submit = async () => {
     const regionData = getSetupData();
 
-    let region = await client.service('regions').get(regionData.id)
-    if (!region) {
-        region = await client.service('regions').create(regionData)
-    }else{
-        await client.service('regions').update(region.id, {count: region.count+1})
+    try {
+        let region = await client.service('regions').get(regionData.id)
+        if (!region) {
+            region = await client.service('regions').create(regionData)
+        } else {
+            await client.service('regions').update(region.id, {count: region.count + 1})
+        }
+    }catch(e) {
+        alert(e.message + ' Die Postleitzahl muss in Niedersachsen liegen.')
+        return
     }
 
     await subscribe(region)
