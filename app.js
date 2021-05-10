@@ -18,14 +18,14 @@ class RegionService {
     }
 
     async get(id) {
-        if (!niedersachsenZips.includes(id)) {
+        if (!niedersachsenZips.includes(parseInt(id))) {
             throw new Error('Ungültige Postleitzahl')
         }
         return this.regions.find(region => region.id === id)
     }
 
     async create (data) {
-        if (!niedersachsenZips.includes(data.id)) {
+        if (!niedersachsenZips.includes(parseInt(data.id))) {
             throw new Error('Ungültige Postleitzahl')
         }
 
