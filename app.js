@@ -89,12 +89,13 @@ const httpsAgent = new https.Agent({
     do {
         const regions = await regionsService.find()
         await Parallel.each(regions, async region => {
+            await new Promise(resolve => setTimeout(resolve, Math.round(Math.random()*10000)))
             console.log('Fetching region', region.id)
             let body
             try {
                 body = await new Promise(async (resolve, reject) => {
                     const req = await https.get(
-                        `https://[2001:4d50:100:1e::20]/portal/rest/appointments/findVaccinationCenterListFree/${region.id}?stiko=&count=1`,
+                        `https://www.impfportal-niedersachsen.de/portal/rest/publicFree/findVaccinationCenterListTicketBP/${region.id}`,
                         {
                             agent: httpsAgent,
                             setHost: false,

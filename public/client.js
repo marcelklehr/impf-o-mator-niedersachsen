@@ -112,7 +112,7 @@ const onUpdate = async (region) => {
   if (!subscriptions[region.id]) {
       return
   }
-  const stockedCenters = region.result.filter(result => !result.outOfStock)
+  const stockedCenters = region.result.filter(result => !result.outOfStock && result.distance < 25)
     stockedCenters.forEach(center => addNotification(center))
     if (stockedCenters.length) {
         delete subscriptions[region.id]
